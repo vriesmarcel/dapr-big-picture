@@ -6,9 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>GloboTicket.Frontend</RootNamespace>
     <UserSecretsId>5f48c47d-aa72-4fad-aa57-77a9dbae08bd</UserSecretsId>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
   </ItemGroup>
 
 </Project>

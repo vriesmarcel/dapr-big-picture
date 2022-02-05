@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ordering", "ordering\ordering.csproj", "{0AA4868D-A125-4336-B055-07DBA6D61E6C}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1A9FBC4B-C7B4-440C-AF60-E09BF36ACC5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,19 +35,13 @@ Global
 		{0AA4868D-A125-4336-B055-07DBA6D61E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA4868D-A125-4336-B055-07DBA6D61E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA4868D-A125-4336-B055-07DBA6D61E6C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3DD09D52-353A-4385-A007-F9F1A315522B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DD09D52-353A-4385-A007-F9F1A315522B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DD09D52-353A-4385-A007-F9F1A315522B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DD09D52-353A-4385-A007-F9F1A315522B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9FBC4B-C7B4-440C-AF60-E09BF36ACC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9FBC4B-C7B4-440C-AF60-E09BF36ACC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9FBC4B-C7B4-440C-AF60-E09BF36ACC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9FBC4B-C7B4-440C-AF60-E09BF36ACC5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{9C0B7280-6ACA-49D5-AEEF-091D49F1DB7F} = {26E30656-0182-4EEF-B89E-281F23389C42}
-		{B9A5B435-AF2E-4481-947F-6951F110766A} = {9C0B7280-6ACA-49D5-AEEF-091D49F1DB7F}
-		{D3D0F60B-0FC3-42B2-AF3E-079F223DEA9A} = {9C0B7280-6ACA-49D5-AEEF-091D49F1DB7F}
-		{3005A4DA-5096-4820-83A1-CB3E6464C1C0} = {9C0B7280-6ACA-49D5-AEEF-091D49F1DB7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9F232D3-5386-4E57-B49F-7AF54A4A8843}

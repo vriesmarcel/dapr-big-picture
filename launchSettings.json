@@ -8,12 +8,8 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "catalog": "StartDebugging",
-        "catalog-dapr": "StartWithoutDebugging",
         "frontend": "StartDebugging",
-        "frontend-dapr": "StartWithoutDebugging",
-        "ordering": "StartDebugging",
-        "ordering-dapr": "StartWithoutDebugging",
-        "redis": "StartWithoutDebugging"
+        "ordering": "StartDebugging"
       }
     }
   }

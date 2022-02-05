@@ -8,8 +8,8 @@ namespace GloboTicket.Catalog.Controllers;
 public class EventController : ControllerBase
 {
     private readonly IEventRepository _eventRepository;
-    
 
+    private static int callcounter = 0;
     private readonly ILogger<EventController> _logger;
 
     public EventController(IEventRepository eventRepository, ILogger<EventController> logger)
@@ -19,9 +19,12 @@ public class EventController : ControllerBase
     }
 
     [HttpGet(Name = "GetEvents")]
-    public async Task<IEnumerable<Event>> GetAll()
+    public async Task<IActionResult> GetAll()
     {
-      return await _eventRepository.GetEvents();
+        // let 1 out of 4 requests fail
+        if (callcounter++ % 4 == 0)
+            return new StatusCodeResult((int)System.Net.HttpStatusCode.TooManyRequests);
+      return  Ok(await _eventRepository.GetEvents());
     }
 
     [HttpGet("{id}", Name = "GetById")]

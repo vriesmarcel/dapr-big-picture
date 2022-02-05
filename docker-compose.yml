@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  catalog:
+    image: ${DOCKER_REGISTRY-}catalog
+    build:
+      context: .
+      dockerfile: catalog/Dockerfile
+    ports: 
+      - "5003:80"
+
+  frontend:
+    image: ${DOCKER_REGISTRY-}frontend
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports: 
+       - "5001:80"
+
+
+  ordering:
+    image: ${DOCKER_REGISTRY-}ordering
+    build:
+      context: .
+      dockerfile: ordering/Dockerfile
+    ports: 
+      - "5002:80"
