@@ -1,6 +1,6 @@
 # Dapr Fundamentals GloboTicket Demo Application
 
-This application is intended to demonstrate the basics of using Dapr to build a microservices application. It is the demo project for the Pluralsight Dapr 1 Fundamentals course, by Mark Heath.
+This application is intended to demonstrate the basics of using Dapr to build a microservices application. It is the demo project for the Pluralsight Dapr 1 Big Picture, by Marcel de Vries and Dapr 1 Fundamentals course, by Mark Heath.
 
 This branch is the "before" example - a version of the demo application that does not have Dapr installed at all. It is unable to send emails, and simply uses HTTP calls for all communication between microservices.
 
