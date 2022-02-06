@@ -32,6 +32,13 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "publishAllPorts": true
+    },
+    "dapr-self-hosted": {
+      "commandName": "Executable",
+      "executablePath": "C:\\dapr\\dapr.exe",
+      "commandLineArgs": "run --app-id catalog --app-port 5016 --dapr-http-port 3501 dotnet run",
+      "workingDirectory": "C:\\Users\\vries\\source\\globoticket-dapr\\catalog",
+      "nativeDebugging": true
     }
   }
 }

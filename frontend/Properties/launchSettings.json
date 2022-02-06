@@ -30,6 +30,12 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
       "useSSL": true
+    },
+    "dapr-self-hosted": {
+      "commandName": "Executable",
+      "executablePath": "C:\\dapr\\dapr.exe",
+      "commandLineArgs": "run --app-id frontend --app-port 5266 --dapr-http-port 3500 dotnet run",
+      "workingDirectory": "C:\\Users\\vries\\source\\globoticket-dapr\\frontend"
     }
   }
 }

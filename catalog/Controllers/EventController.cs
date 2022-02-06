@@ -23,8 +23,13 @@ public class EventController : ControllerBase
     {
         // let 1 out of 4 requests fail
         if (callcounter++ % 4 == 0)
-            return new StatusCodeResult((int)System.Net.HttpStatusCode.TooManyRequests);
-      return  Ok(await _eventRepository.GetEvents());
+        {
+            Thread.Sleep(2000);
+            HttpContext.Abort();
+            return Ok();
+        }
+        else
+            return  Ok(await _eventRepository.GetEvents());
     }
 
     [HttpGet("{id}", Name = "GetById")]
