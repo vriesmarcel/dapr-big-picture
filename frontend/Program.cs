@@ -9,11 +9,20 @@ builder.Services.AddControllersWithViews();
 
 // note: for this demo we're using the DAPR_HTTP_PORT environment variable to decide if we're using Dapr or not
 builder.Services.AddHttpClient<IEventCatalogService, EventCatalogService>((sp, c) =>
-    c.BaseAddress = new Uri(sp.GetService<IConfiguration>()["ApiConfigs:EventCatalog:Uri"]));
-builder.Services.AddSingleton<IShoppingBasketService, InMemoryShoppingBasketService>();
-builder.Services.AddHttpClient<IOrderSubmissionService, HttpOrderSubmissionService>((sp, c) =>
-    c.BaseAddress = new Uri(sp.GetService<IConfiguration>()["ApiConfigs:Ordering:Uri"]));
+{
+    c.BaseAddress = new Uri(sp.GetService<IConfiguration>()["ApiConfigs:EventCatalog:Uri"]);
+    c.DefaultRequestHeaders.Add("dapr-app-id", "catalog");
+});
 
+builder.Services.AddHttpClient<IOrderSubmissionService, HttpOrderSubmissionService>((sp, c) =>
+{
+    c.BaseAddress = new Uri(sp.GetService<IConfiguration>()["ApiConfigs:Ordering:Uri"]);
+    c.DefaultRequestHeaders.Add("dapr-app-id", "ordering");
+}
+);
+
+
+builder.Services.AddSingleton<IShoppingBasketService, InMemoryShoppingBasketService>(); 
 builder.Services.AddSingleton<Settings>();
 
 var app = builder.Build();
