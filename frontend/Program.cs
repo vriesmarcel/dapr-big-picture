@@ -11,18 +11,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IEventCatalogService, EventCatalogService>((sp, c) =>
 {
     c.BaseAddress = new Uri(sp.GetService<IConfiguration>()["ApiConfigs:EventCatalog:Uri"]);
-    c.DefaultRequestHeaders.Add("dapr-app-id", "catalog");
 });
-
 builder.Services.AddHttpClient<IOrderSubmissionService, HttpOrderSubmissionService>((sp, c) =>
 {
     c.BaseAddress = new Uri(sp.GetService<IConfiguration>()["ApiConfigs:Ordering:Uri"]);
-    c.DefaultRequestHeaders.Add("dapr-app-id", "ordering");
-}
-);
+});
 
-
-builder.Services.AddSingleton<IShoppingBasketService, InMemoryShoppingBasketService>(); 
+builder.Services.AddSingleton<IShoppingBasketService, InMemoryShoppingBasketService>();
 builder.Services.AddSingleton<Settings>();
 
 var app = builder.Build();

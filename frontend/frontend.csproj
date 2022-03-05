@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>GloboTicket.Frontend</RootNamespace>
     <UserSecretsId>5f48c47d-aa72-4fad-aa57-77a9dbae08bd</UserSecretsId>

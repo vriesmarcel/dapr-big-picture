@@ -27,7 +27,7 @@ namespace GloboTicket.Frontend.Controllers
             this.logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var currentBasketId = Request.Cookies.GetCurrentBasketId(settings);
             //var basket = await shoppingBasketService.GetBasket(currentBasketId);
