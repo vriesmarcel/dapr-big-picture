@@ -11,10 +11,11 @@ public class EmailSender
         this.logger = logger;
     }
 
-    public async Task SendEmailForOrder(OrderForCreation order)
+    public Task SendEmailForOrder(OrderForCreation order)
     {
         logger.LogInformation($"Received a new order for {order.CustomerDetails.Email}");
         logger.LogWarning("Not using Dapr so no email sent");
+        return Task.CompletedTask;
     }
 }
 
