@@ -24,10 +24,10 @@ else
 {
     Console.WriteLine("USING DAPR");
     builder.Services.AddDaprClient();
-    //builder.Services.AddHttpClient<IEventCatalogService, EventCatalogService>(c =>
-    //    c.BaseAddress = new Uri($"http://localhost:{daprPort}/v1.0/invoke/catalog/method/"));
+    // Using the DAPR SDK to create a DaprClient, in stead of fiddling with URI's our selves
     builder.Services.AddSingleton<IEventCatalogService>(sc => 
         new EventCatalogService(DaprClient.CreateInvokeHttpClient("catalog")));
+    
     builder.Services.AddScoped<IShoppingBasketService, DaprClientStateStoreShoppingBasket>();
     builder.Services.AddScoped<IOrderSubmissionService, DaprOrderSubmissionService>();
 }
