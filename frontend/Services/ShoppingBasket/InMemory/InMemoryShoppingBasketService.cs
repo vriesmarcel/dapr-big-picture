@@ -41,44 +41,46 @@ namespace GloboTicket.Frontend.Services
             return basket.Add(basketLine, @event);
         }
 
-        public async Task<Basket?> GetBasket(Guid basketId)
+        public Task<Basket> GetBasket(Guid basketId)
         {
             if (!baskets.TryGetValue(basketId, out var basket))
             {
-                return null;
+                return Task.FromResult<Basket>(null);
             }
-            return new Basket()
+            return Task.FromResult(new Basket()
             {
                 BasketId = basketId,
                 NumberOfItems = basket.Lines.Count,
                 UserId = basket.UserId
-            };
+            });
 
         }
 
-        public async Task<IEnumerable<BasketLine>> GetLinesForBasket(Guid basketId)
+        public Task<IEnumerable<BasketLine>> GetLinesForBasket(Guid basketId)
         {
             if (!baskets.TryGetValue(basketId, out var basket))
             {
-                return new BasketLine[0];
+                return Task.FromResult<IEnumerable<BasketLine>>(new BasketLine[0]);
             }
-            return basket.Lines;
+            return Task.FromResult < IEnumerable < BasketLine >> (basket.Lines);
         }
 
-        public async Task UpdateLine(Guid basketId, BasketLineForUpdate basketLineForUpdate)
+        public Task UpdateLine(Guid basketId, BasketLineForUpdate basketLineForUpdate)
         {
             if (baskets.TryGetValue(basketId, out var basket))
             {
                 basket.Update(basketLineForUpdate);
             }
+            return Task.CompletedTask;
         }
 
-        public async Task RemoveLine(Guid basketId, Guid lineId)
+        public Task RemoveLine(Guid basketId, Guid lineId)
         {
             if (baskets.TryGetValue(basketId, out var basket))
             {
                 basket.Remove(lineId);
             }
+            return Task.CompletedTask;
         }
 
         public Task ClearBasket(Guid basketId)
