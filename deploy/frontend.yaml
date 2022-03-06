@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: markheath/globoticket-dapr-frontend:latest
+        image: marcelv/globoticket-dapr-frontend:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always

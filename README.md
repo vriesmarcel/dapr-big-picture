@@ -40,3 +40,5 @@ You will be able to access Zipkin traces on: `http://localhost:9412/zipkin/`
 
 ## Deploying to Kubernetes (AKS) on Azure
 The `ask-deploy.ps1` PowerShell script shows the steps needed to deploy this to Azure. Don't run this directly. You'll need the Azure CLI installed, and you'll also need to pick unique resource names that are available. The script includes example commands you can use to check it's all working as expected.
+
+You need to change the name of the subscription you will use plus create a unique name for storage account and service bus. Also you need to change these names in the component configurations to match the choosen names. Otherwise the application will fail at runtime with messages it can not find the resources specified.

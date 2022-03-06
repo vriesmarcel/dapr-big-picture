@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: catalog
-        image: markheath/globoticket-dapr-catalog:latest
+        image: marcelv/globoticket-dapr-catalog:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always

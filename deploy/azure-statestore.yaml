@@ -7,7 +7,7 @@ spec:
   version: v1
   metadata:
   - name: accountName
-    value: "globoticketstate"
+    value: "psgloboticketstate"
   - name: accountKey
     secretKeyRef:
       name: blob-secret

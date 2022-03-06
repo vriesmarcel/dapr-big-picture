@@ -4,7 +4,7 @@
 # log in to Azure CLI
 az login
 # select the subscription we want to use
-az account set -s "My sub name"
+az account set -s "MVPSponsorship"
 
 $RESOURCEGROUP = "globoticket-dapr"
 $LOCATION = "westeurope"
@@ -25,7 +25,9 @@ kubectl config current-context
 
 ### STEP 2 - set up blob storage for state
 # $RAND = -join ((48..57) + (97..122) | Get-Random -Count 6 | % {[char]$_})
-$STORAGE_ACCOUNT = "globoticketstate"
+# When you change this name, ensure you also make the same change to .\deploy\azure-statestore.yaml
+# this defines the configuration for dapr state store and needs to point to same account name
+$STORAGE_ACCOUNT = "psgloboticketstate"
 
 az storage account create -n $STORAGE_ACCOUNT -g $RESOURCEGROUP -l $LOCATION --sku Standard_LRS
 
@@ -40,7 +42,7 @@ $env:AZURE_STORAGE_CONNECTION_STRING = $STORAGE_CONNECTION_STRING
 az storage container create -n "statestore" --public-access off
 
 ### STEP 3 - set up Azure service bus for pub sub
-$SERVICE_BUS = "globoticketpubsub"
+$SERVICE_BUS = "psgloboticketpubsub"
 
 az servicebus namespace create -g $RESOURCEGROUP `
     -n $SERVICE_BUS -l $LOCATION --sku Standard
@@ -65,15 +67,20 @@ dapr upgrade -k --runtime-version 1.6.0
 ### STEP 5 - get containers pushed to docker
 
 # ensure we've built all our containers
-docker build -f .\frontend\Dockerfile -t markheath/globoticket-dapr-frontend .
-docker build -f .\catalog\Dockerfile -t markheath/globoticket-dapr-catalog .
-docker build -f .\ordering\Dockerfile -t markheath/globoticket-dapr-ordering .
+docker build -f .\frontend\Dockerfile -t marcelv/globoticket-dapr-frontend .
+docker build -f .\catalog\Dockerfile -t marcelv/globoticket-dapr-catalog .
+docker build -f .\ordering\Dockerfile -t marcelv/globoticket-dapr-ordering .
 
 # and push them to Docker hub 
 # (real world would use ACR instead for private hosting and faster download in Azure)
-docker push markheath/globoticket-dapr-frontend
-docker push markheath/globoticket-dapr-catalog
-docker push markheath/globoticket-dapr-ordering
+# log in with your docker credentials and ensure the image names match your username befor you push
+# fix the deployment files to match the image names before you run kubectl apply on the deployment
+# these files are: catalog.yaml fronted.yaml and oredering.yaml in the deployment folder
+docker login
+
+docker push marcelv/globoticket-dapr-frontend
+docker push marcelv/globoticket-dapr-catalog
+docker push marcelv/globoticket-dapr-ordering
 
 # STEP 6 - put connection strings into Kubernetes secrets
 
@@ -154,6 +161,16 @@ Start-Process "http://$($FRONTEND_IP):8080"
 # let's check in zipkin - make sure we're looking at the right zipkin (the one in AKS) by using a different port number
 kubectl port-forward svc/zipkin 9412:9411
 # navigate to http://localhost:9412
+
+# Create redis cache in cluster, so we can show swapping of config
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install redis bitnami/redis
+
+kubectl apply -f .\deploy\redis-statestore.yaml
+kubectl apply -f .\deploy\redis-pubsub.yaml
+# now create component config that contains redis for pubsub and storage
+#and deploy this to the cluster
+
 
 ### STEP 12 - CLEAN UP
 az group delete -n $RESOURCEGROUP
