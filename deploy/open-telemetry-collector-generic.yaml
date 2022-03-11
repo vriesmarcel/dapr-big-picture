@@ -8,6 +8,10 @@ metadata:
 data:
   otel-collector-config: |
     receivers:
+      otlp:
+        protocols: 
+          grpc:
+          http:
       zipkin:
         endpoint: 0.0.0.0:9411
     extensions:
@@ -20,7 +24,6 @@ data:
       logging:
         loglevel: debug
       azuremonitor:
-      azuremonitor/2:
         # endpoint is the uri used to communicate with Azure Monitor
         endpoint: "https://dc.services.visualstudio.com/v2/track"
         # instrumentation_key is the unique identifer for your Application Insights resource
@@ -29,6 +32,7 @@ data:
         maxbatchsize: 100
         # maxbatchinterval is the maximum time to wait before calling the configured endpoint.
         maxbatchinterval: 10s
+
         
     service:
       extensions: [pprof, zpages, health_check]
@@ -36,8 +40,15 @@ data:
         traces:
           receivers: [zipkin]
           # List your exporter here.
-          exporters: [azuremonitor, logging]
-        
+          exporters: [azuremonitor]
+        metrics:
+          receivers: [otlp]
+          # List your exporter here.
+          exporters: [azuremonitor]        
+        logs:
+          receivers: [otlp]
+          # List your exporter here.
+          exporters: [azuremonitor]
 ---
 apiVersion: v1
 kind: Service
