@@ -35,9 +35,9 @@
     },
     "dapr-self-hosted": {
       "commandName": "Executable",
-      "executablePath": "C:\\dapr\\dapr.exe",
+      "executablePath": "dapr",
       "commandLineArgs": "run --app-id catalog --app-port 5016 --dapr-http-port 3501 dotnet run",
-      "workingDirectory": "C:\\Users\\vries\\source\\globoticket-dapr\\catalog"
+      "workingDirectory": "$(ProjectDir)"
     }
   }
 }
