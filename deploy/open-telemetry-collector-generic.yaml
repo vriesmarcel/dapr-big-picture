@@ -41,14 +41,7 @@ data:
           receivers: [zipkin]
           # List your exporter here.
           exporters: [azuremonitor]
-        metrics:
-          receivers: [otlp]
-          # List your exporter here.
-          exporters: [azuremonitor]        
-        logs:
-          receivers: [otlp]
-          # List your exporter here.
-          exporters: [azuremonitor]
+
 ---
 apiVersion: v1
 kind: Service
