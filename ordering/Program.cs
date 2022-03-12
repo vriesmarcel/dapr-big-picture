@@ -10,6 +10,7 @@ builder.Services.AddControllers().AddDapr();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<EmailSender>();
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 var app = builder.Build();
 
