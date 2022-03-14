@@ -126,7 +126,23 @@ kubectl port-forward svc/maildev 8081:80
 # can look at the components in Dapr dashboard
 dapr dashboard -k
 
-# STEP 11 - install app onto AKS
+### STEP 11 - Configure Telemetry
+
+```
+The application uses custom telemetry and trace telemetry. The trace telemetry is reported by Dapr using Open Telemetry. The application itself also reports directly to AppInsights
+
+* Set up an application insights resource
+* Edit the instrumentationkey in all appsetings.config files
+* Edit the instrumentationkey in open-telemetry-collector-generic.yaml
+
+```
+$APPINSIGHTS = "AppInsightsChaos"
+az extension add -n application-insights 
+az monitor app-insights component create --app $($APPINSIGHTS) --location $($LOCATION) --resource-group $($RESOURCEGROUP)
+kubectl apply -f .\deploy\collector-config.yaml
+kubectl apply -f .\deploy\open-telemetry-collector-generic.yaml
+
+# STEP 12 - install app onto AKS
 kubectl apply -f .\deploy\frontend.yaml
 kubectl apply -f .\deploy\ordering.yaml
 kubectl apply -f .\deploy\catalog.yaml # n.b. to remove its kubectl delete
@@ -151,7 +167,7 @@ kubectl logs $FRONTEND_POD_NAME daprd # to see the logs from the sidecar
 # to view the AKS cluster in the Azure portal
 az aks browse -n $AKS_NAME -g $RESOURCEGROUP
 
-### STEP 11 - TEST THE APP
+### STEP 13 - TEST THE APP
 
 $FRONTEND_IP = kubectl get svc frontend -o jsonpath="{.status.loadBalancer.ingress[*].ip}"
 
@@ -172,5 +188,5 @@ kubectl apply -f .\deploy\redis-pubsub.yaml
 #and deploy this to the cluster
 
 
-### STEP 12 - CLEAN UP
+### STEP 14 - CLEAN UP
 az group delete -n $RESOURCEGROUP
