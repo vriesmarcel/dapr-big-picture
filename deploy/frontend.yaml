@@ -39,6 +39,11 @@ spec:
       containers:
       - name: frontend
         image: marcelv/globoticket-dapr-frontend:latest
+        env:
+        - name: ApiConfigs__Ordering__Uri
+          value: "http://ordering"
+        - name: ApiConfigs__EventCatalog__Uri
+          value: "http://catalog"
         ports:
         - containerPort: 80
         imagePullPolicy: Always
